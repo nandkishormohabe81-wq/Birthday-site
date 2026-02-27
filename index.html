@@ -2,52 +2,60 @@
 <html>
 <head>
   <title>Happy Birthday Palak 🎂</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
       font-family: Arial, sans-serif;
-      text-align: center;
-      background: linear-gradient(to right, #ff758c, #ff7eb3);
       overflow-x: hidden;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
       color: white;
     }
 
-    /* Slide styling */
     .slide {
       display: none;
-      padding: 20px;
+      width: 100%;
+      height: 100vh;
+      text-align: center;
       position: relative;
     }
 
-    img {
-      width: 85%;
-      max-height: 500px;
+    .slide img {
+      max-width: 90%;
+      max-height: 70vh;
+      margin-top: 50px;
       border-radius: 20px;
       box-shadow: 0px 5px 20px rgba(0,0,0,0.4);
       transition: transform 0.6s ease;
     }
 
-    img:hover { transform: scale(1.05); }
+    .slide img:hover { transform: scale(1.05); }
 
     button {
-      margin-top: 20px;
-      padding: 10px 25px;
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 15px 30px;
       border: none;
-      border-radius: 20px;
+      border-radius: 25px;
       background: white;
       color: #ff4b7d;
       font-weight: bold;
       cursor: pointer;
-      transition: 0.3s;
+      font-size: 1.2rem;
     }
 
     button:hover { background: #ff4b7d; color: white; }
 
-    /* Balloon animation */
+    /* Balloon style */
     .balloon {
       position: absolute;
       width: 50px;
-      animation: float 7s linear infinite;
+      animation: float 8s linear infinite;
       z-index: 0;
     }
 
@@ -56,14 +64,14 @@
       100% { transform: translateY(-150px) rotate(360deg); }
     }
 
-    /* Confetti canvas */
+    /* Confetti */
     #confetti-canvas {
       position: fixed;
       top:0; left:0;
       width:100%;
       height:100%;
-      pointer-events: none;
-      z-index: 999;
+      pointer-events:none;
+      z-index:999;
     }
   </style>
 </head>
@@ -75,39 +83,32 @@
 <audio id="bg-music" src="birthday.mp3" autoplay loop></audio>
 
 <!-- Balloons -->
-<img src="https://i.ibb.co/7yzDkJZ/balloon1.png" class="balloon" style="left:10%;">
-<img src="https://i.ibb.co/6mrv2pH/balloon2.png" class="balloon" style="left:30%;">
-<img src="https://i.ibb.co/qykfZ5D/balloon3.png" class="balloon" style="left:50%;">
-<img src="https://i.ibb.co/k2N1tQF/balloon4.png" class="balloon" style="left:70%;">
-<img src="https://i.ibb.co/tKjSxq1/balloon5.png" class="balloon" style="left:90%;">
+<img src="https://i.ibb.co/7yzDkJZ/balloon1.png" class="balloon" style="left:5%;">
+<img src="https://i.ibb.co/6mrv2pH/balloon2.png" class="balloon" style="left:20%;">
+<img src="https://i.ibb.co/qykfZ5D/balloon3.png" class="balloon" style="left:35%;">
+<img src="https://i.ibb.co/k2N1tQF/balloon4.png" class="balloon" style="left:50%;">
+<img src="https://i.ibb.co/tKjSxq1/balloon5.png" class="balloon" style="left:65%;">
+<img src="https://i.ibb.co/7yzDkJZ/balloon6.png" class="balloon" style="left:80%;">
+<img src="https://i.ibb.co/6mrv2pH/balloon7.png" class="balloon" style="left:90%;">
 
 <!-- Slides -->
 <div class="slide" style="display:block;">
   <h1>🎉 Happy Birthday Palak 🎉</h1>
-  <p>Click Start to begin the Surprise 💖</p>
+  <p>Click Start to begin the surprise 💖</p>
   <button onclick="nextSlide()">Start</button>
 </div>
 
-<div class="slide">
-  <img src="1.jpg">
-  <br><button onclick="nextSlide(); launchConfetti();">Next</button>
-</div>
+<!-- 8 Slides -->
+<div class="slide"><img src="1.jpg"><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="2.jpg"><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="3.jpg"><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="4.jpg"><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="5.jpg"><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="6.jpg"><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="7.jpg"><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="8.jpg"><button onclick="nextSlide(); launchConfetti();">Next</button></div>
 
-<div class="slide">
-  <img src="2.jpg">
-  <br><button onclick="nextSlide(); launchConfetti();">Next</button>
-</div>
-
-<div class="slide">
-  <img src="3.jpg">
-  <br><button onclick="nextSlide(); launchConfetti();">Next</button>
-</div>
-
-<div class="slide">
-  <img src="4.jpg">
-  <br><button onclick="nextSlide(); launchConfetti();">Next</button>
-</div>
-
+<!-- Last Game/Surprise Slide -->
 <div class="slide">
   <h1>🎮 Game Time 🎮</h1>
   <p>Click below for a surprise gift!</p>
@@ -115,7 +116,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
 <script>
 let current = 0;
 let slides = document.getElementsByClassName("slide");
@@ -123,22 +123,21 @@ let slides = document.getElementsByClassName("slide");
 function nextSlide() {
   slides[current].style.display = "none";
   current++;
-  if (current < slides.length) {
+  if(current < slides.length){
     slides[current].style.display = "block";
   }
 }
 
-// Confetti function
+// Confetti effect
 function launchConfetti() {
-  var duration = 1 * 1000;
-  var end = Date.now() + duration;
-  (function frame() {
-    confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 } });
-    confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 } });
-    if (Date.now() < end) requestAnimationFrame(frame);
+  let duration = 1*1000;
+  let end = Date.now() + duration;
+  (function frame(){
+    confetti({ particleCount:5, angle:60, spread:55, origin:{x:0} });
+    confetti({ particleCount:5, angle:120, spread:55, origin:{x:1} });
+    if(Date.now() < end) requestAnimationFrame(frame);
   }());
 }
 </script>
-
 </body>
 </html>
