@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Palak</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+:root{
+--pink:#ffd1dc;
+--soft:#fff0f5;
+--deep:#db7093;
+--white:#fff;
+}
+
+body{
+margin:0;
+font-family:'Lato',sans-serif;
+background:var(--soft);
+overflow-x:hidden;
+}
+
+.hidden{display:none;}
+
+#welcome{
+position:fixed;
+width:100%;
+height:100vh;
+background:linear-gradient(135deg,#fff0f5,#ffe4e1);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:1000;
+text-align:center;
+}
+
+#welcome h1{
+font-family:'Dancing Script',cursive;
+font-size:3rem;
+color:var(--deep);
+}
+
+#enter{
+padding:12px 35px;
+border-radius:30px;
+border:none;
+background:var(--deep);
+color:white;
+font-size:18px;
+cursor:pointer;
+margin-top:20px;
+}
+
+.slide{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:40px 20px;
+opacity:0;
+transform:translateY(40px);
+transition:0.8s;
+}
+
+.slide.visible{
+opacity:1;
+transform:translateY(0);
+}
+
+.slide:nth-child(even){
+background:white;
+}
+
+.slide h2{
+font-family:'Dancing Script',cursive;
+color:var(--deep);
+font-size:2rem;
+}
+
+.song-text{
+margin-top:20px;
+color:var(--deep);
+font-weight:bold;
+cursor:pointer;
+text-decoration:underline;
+}
+
+.audio-btn{
+position:fixed;
+bottom:20px;
+right:20px;
+background:white;
+width:50px;
+height:50px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+cursor:pointer;
+box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+
+<body>
+
+<!-- Welcome Screen -->
+<div id="welcome">
+<h1>Happy Birthday Palak 🎂💖</h1>
+<button id="enter">Tap to Enter 🎁</button>
+</div>
+
+<!-- Background Music -->
+<audio id="bg-music" loop>
+<source src="your-music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="audio-btn" id="music-toggle">🔊</div>
+
+<!-- Main Content -->
+<div id="content">
+
+<div class="slide">
+<h2>Our Memories 💕</h2>
+<p>Add your first slide content here</p>
+</div>
+
+<div class="slide">
+<h2>Beautiful Moments ✨</h2>
+<p>Add your second slide content here</p>
+</div>
+
+<div class="slide">
+<h2>Special Song For You 🎵</h2>
+<p class="song-text" onclick="playSong()">Click here to play your song 💖</p>
+</div>
+
+<div class="slide">
+<h2>Thank You For Being Special 💝</h2>
+<p>You are truly amazing and precious.</p>
+</div>
+
+</div>
+
+<script>
+const enterBtn=document.getElementById("enter");
+const welcome=document.getElementById("welcome");
+const music=document.getElementById("bg-music");
+const toggle=document.getElementById("music-toggle");
+
+enterBtn.onclick=()=>{
+welcome.classList.add("hidden");
+music.play();
+confetti({particleCount:150,spread:90});
+}
+
+toggle.onclick=()=>{
+if(music.paused){
+music.play();
+toggle.innerHTML="🔊";
+}else{
+music.pause();
+toggle.innerHTML="🔇";
+}
+}
+
+function playSong(){
+music.src="your-special-song.mp3";
+music.play();
+}
+
+const slides=document.querySelectorAll(".slide");
+
+window.addEventListener("scroll",()=>{
+slides.forEach(slide=>{
+const pos=slide.getBoundingClientRect().top;
+if(pos<window.innerHeight-100){
+slide.classList.add("visible");
+}
+});
+});
+</script>
+
+</body>
+</html>
