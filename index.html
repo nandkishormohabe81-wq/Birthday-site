@@ -67,13 +67,17 @@ button {
     font-weight:bold;
     cursor:pointer;
     font-size:1.2rem;
-    position:absolute;
-    bottom:50px;
-    left:50%;
-    transform:translateX(-50%);
 }
 
 button:hover { background:#ff4b7d; color:white; }
+
+#start-button {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    z-index:100;
+}
 
 #confetti-canvas {
     position:fixed; top:0; left:0;
@@ -109,9 +113,115 @@ for(let i=0;i<15;i++){
 <div class="slide" style="display:block;">
   <h1>🎉 Happy Birthday Palak 🎉</h1>
   <p>Click Start to begin the surprise 💖</p>
-  <button onclick="startSlides()">Start</button>
+  <button id="start-button" onclick="startSlides()">Start</button>
 </div>
 
+<!-- 8 Slides -->
+<div class="slide"><img src="1.jpg"><br><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="2.jpg"><br><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="3.jpg"><br><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="4.jpg"><br><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="5.jpg"><br><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="6.jpg"><br><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="7.jpg"><br><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="8.jpg"><br><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+
+<!-- Last Surprise Slide -->
+<div class="slide">
+  <h1>🎮 Click Me For Your Surprise! 🎮</h1>
+  <button onclick="alert('From Bittu ❤️\nStay Blessed & Keep Growing Chiku 🎉')">Click Me</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+let current = 0;
+let slides = document.getElementsByClassName("slide");
+
+// Start button: play music + first slide
+function startSlides(){
+    document.getElementById("bg-music").play(); // Music starts
+    document.getElementById("start-button").style.display="none"; // Hide start button
+    nextSlide();
+}
+
+// Next slide
+function nextSlide(){
+    slides[current].style.display="none";
+    current++;
+    if(current<slides.length){
+        slides[current].style.display="block";
+    }
+}
+
+// Confetti effect
+function launchConfetti(){
+    let duration = 1*1000;
+    let end = Date.now()+duration;
+    (function frame(){
+        confetti({particleCount:5, angle:60, spread:55, origin:{x:0}});
+        confetti({particleCount:5, angle:120, spread:55, origin:{x:1}});
+        if(Date.now()<end) requestAnimationFrame(frame);
+    }());
+}
+</script>
+
+</body>
+</html>  <h1>🎉 Happy Birthday Palak 🎉</h1>
+  <p>Click Start to begin the surprise 💖</p>
+  <button id="start-button" onclick="startSlides()">Start</button>
+</div>
+
+<!-- 8 Slides -->
+<div class="slide"><img src="1.jpg"><br><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="2.jpg"><br><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="3.jpg"><br><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="4.jpg"><br><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="5.jpg"><br><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="6.jpg"><br><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="7.jpg"><br><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+<div class="slide"><img src="8.jpg"><br><button onclick="nextSlide(); launchConfetti();">Next</button></div>
+
+<!-- Last Surprise Slide -->
+<div class="slide">
+  <h1>🎮 Click Me For Your Surprise! 🎮</h1>
+  <button onclick="alert('From Bittu ❤️\nStay Blessed & Keep Growing Chiku 🎉')">Click Me</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+let current = 0;
+let slides = document.getElementsByClassName("slide");
+
+// Start button: play music + first slide
+function startSlides(){
+    document.getElementById("bg-music").play(); // Music starts
+    document.getElementById("start-button").style.display="none"; // Hide start button
+    nextSlide();
+}
+
+// Next slide
+function nextSlide(){
+    slides[current].style.display="none";
+    current++;
+    if(current<slides.length){
+        slides[current].style.display="block";
+    }
+}
+
+// Confetti effect
+function launchConfetti(){
+    let duration = 1*1000;
+    let end = Date.now()+duration;
+    (function frame(){
+        confetti({particleCount:5, angle:60, spread:55, origin:{x:0}});
+        confetti({particleCount:5, angle:120, spread:55, origin:{x:1}});
+        if(Date.now()<end) requestAnimationFrame(frame);
+    }());
+}
+</script>
+
+</body>
+</html>
 <!-- 8 Slides -->
 <div class="slide"><img src="1.jpg"><button onclick="nextSlide(); launchConfetti();">Next</button></div>
 <div class="slide"><img src="2.jpg"><button onclick="nextSlide(); launchConfetti();">Next</button></div>
@@ -161,3 +271,4 @@ function launchConfetti(){
 </script>
 </body>
 </html>
+
