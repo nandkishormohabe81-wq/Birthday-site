@@ -5,21 +5,30 @@
   <style>
     body {
       margin: 0;
-      text-align: center;
       font-family: Arial, sans-serif;
+      text-align: center;
       background: linear-gradient(to right, #ff758c, #ff7eb3);
+      overflow-x: hidden;
       color: white;
     }
+
+    /* Slide styling */
     .slide {
       display: none;
       padding: 20px;
+      position: relative;
     }
+
     img {
-      width: 80%;
+      width: 85%;
       max-height: 500px;
       border-radius: 20px;
       box-shadow: 0px 5px 20px rgba(0,0,0,0.4);
+      transition: transform 0.6s ease;
     }
+
+    img:hover { transform: scale(1.05); }
+
     button {
       margin-top: 20px;
       padding: 10px 25px;
@@ -29,42 +38,83 @@
       color: #ff4b7d;
       font-weight: bold;
       cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover { background: #ff4b7d; color: white; }
+
+    /* Balloon animation */
+    .balloon {
+      position: absolute;
+      width: 50px;
+      animation: float 7s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-150px) rotate(360deg); }
+    }
+
+    /* Confetti canvas */
+    #confetti-canvas {
+      position: fixed;
+      top:0; left:0;
+      width:100%;
+      height:100%;
+      pointer-events: none;
+      z-index: 999;
     }
   </style>
 </head>
 <body>
 
+<canvas id="confetti-canvas"></canvas>
+
+<!-- Background Music -->
+<audio id="bg-music" src="birthday.mp3" autoplay loop></audio>
+
+<!-- Balloons -->
+<img src="https://i.ibb.co/7yzDkJZ/balloon1.png" class="balloon" style="left:10%;">
+<img src="https://i.ibb.co/6mrv2pH/balloon2.png" class="balloon" style="left:30%;">
+<img src="https://i.ibb.co/qykfZ5D/balloon3.png" class="balloon" style="left:50%;">
+<img src="https://i.ibb.co/k2N1tQF/balloon4.png" class="balloon" style="left:70%;">
+<img src="https://i.ibb.co/tKjSxq1/balloon5.png" class="balloon" style="left:90%;">
+
+<!-- Slides -->
 <div class="slide" style="display:block;">
-  <h1>🎉 Welcome Palak 🎉</h1>
+  <h1>🎉 Happy Birthday Palak 🎉</h1>
+  <p>Click Start to begin the Surprise 💖</p>
   <button onclick="nextSlide()">Start</button>
 </div>
 
 <div class="slide">
-  <img src="slide1.jpg">
-  <br><button onclick="nextSlide()">Next</button>
+  <img src="1.jpg">
+  <br><button onclick="nextSlide(); launchConfetti();">Next</button>
 </div>
 
 <div class="slide">
-  <img src="slide2.jpg">
-  <br><button onclick="nextSlide()">Next</button>
+  <img src="2.jpg">
+  <br><button onclick="nextSlide(); launchConfetti();">Next</button>
 </div>
 
 <div class="slide">
-  <img src="slide3.jpg">
-  <br><button onclick="nextSlide()">Next</button>
+  <img src="3.jpg">
+  <br><button onclick="nextSlide(); launchConfetti();">Next</button>
 </div>
 
 <div class="slide">
-  <img src="slide4.jpg">
-  <br><button onclick="nextSlide()">Next</button>
+  <img src="4.jpg">
+  <br><button onclick="nextSlide(); launchConfetti();">Next</button>
 </div>
 
 <div class="slide">
   <h1>🎮 Game Time 🎮</h1>
-  <button onclick="alert('You are the Best Friend Ever 💖')">
-    Click Me
-  </button>
+  <p>Click below for a surprise gift!</p>
+  <button onclick="alert('You are the Best Friend Ever 💖')">Click Me</button>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
 let current = 0;
@@ -76,6 +126,17 @@ function nextSlide() {
   if (current < slides.length) {
     slides[current].style.display = "block";
   }
+}
+
+// Confetti function
+function launchConfetti() {
+  var duration = 1 * 1000;
+  var end = Date.now() + duration;
+  (function frame() {
+    confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 } });
+    confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 } });
+    if (Date.now() < end) requestAnimationFrame(frame);
+  }());
 }
 </script>
 
