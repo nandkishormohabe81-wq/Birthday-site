@@ -5,17 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday Palak 🎂</title>
 <style>
-  html, body {
+html, body {
     margin:0; padding:0; width:100%; height:100%;
     font-family: 'Arial', sans-serif;
     overflow:hidden;
     background: linear-gradient(to right, #ff758c, #ff7eb3);
     color:white;
     position:relative;
-  }
+}
 
-  /* Background floating text balloons */
-  .text-balloon {
+/* Floating text balloons */
+.text-balloon {
     position:absolute;
     font-size: 2rem;
     font-weight:bold;
@@ -25,15 +25,15 @@
     white-space: nowrap;
     user-select: none;
     pointer-events: none;
-  }
+}
 
-  @keyframes floatUp {
+@keyframes floatUp {
     0% { transform: translateY(100vh) rotate(0deg); }
     100% { transform: translateY(-150px) rotate(360deg); }
-  }
+}
 
-  /* Slides */
-  .slide {
+/* Slides */
+.slide {
     display:none;
     width:100%;
     height:100vh;
@@ -43,21 +43,21 @@
     top:0; left:0;
     background: transparent;
     animation: fadeIn 0.8s;
-  }
+}
 
-  @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+@keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
 
-  .slide img {
+.slide img {
     max-width:90%;
     max-height:65vh;
     border-radius:20px;
     box-shadow:0px 5px 20px rgba(0,0,0,0.4);
     transition: transform 0.6s ease;
-  }
+}
 
-  .slide img:hover { transform: scale(1.05); }
+.slide img:hover { transform: scale(1.05); }
 
-  button {
+button {
     margin-top:20px;
     padding:15px 30px;
     border:none;
@@ -71,17 +71,16 @@
     bottom:50px;
     left:50%;
     transform:translateX(-50%);
-  }
+}
 
-  button:hover { background:#ff4b7d; color:white; }
+button:hover { background:#ff4b7d; color:white; }
 
-  #confetti-canvas {
+#confetti-canvas {
     position:fixed; top:0; left:0;
     width:100%; height:100%;
     pointer-events:none;
     z-index:999;
-  }
-
+}
 </style>
 </head>
 <body>
@@ -89,12 +88,12 @@
 <canvas id="confetti-canvas"></canvas>
 
 <!-- Background Music -->
-<audio id="bg-music" src="birthday.mp3" autoplay loop></audio>
+<audio id="bg-music" src="birthday.mp3" loop></audio>
 
 <!-- Floating text balloons -->
 <script>
-  const colors = ["#fff","#ffd1dc","#ffe4e1","#ffb6c1"];
-  for(let i=0;i<15;i++){
+const colors = ["#fff","#ffd1dc","#ffe4e1","#ffb6c1"];
+for(let i=0;i<15;i++){
     let t = document.createElement("div");
     t.className = "text-balloon";
     t.style.left = Math.random()*90 + "%";
@@ -103,17 +102,17 @@
     t.innerText = "🎉 Happy Birthday 🎉";
     t.style.animationDuration = (8 + Math.random()*5) + "s";
     document.body.appendChild(t);
-  }
+}
 </script>
 
 <!-- Slides -->
 <div class="slide" style="display:block;">
   <h1>🎉 Happy Birthday Palak 🎉</h1>
   <p>Click Start to begin the surprise 💖</p>
-  <button onclick="nextSlide()">Start</button>
+  <button onclick="startSlides()">Start</button>
 </div>
 
-<!-- 8 slides -->
+<!-- 8 Slides -->
 <div class="slide"><img src="1.jpg"><button onclick="nextSlide(); launchConfetti();">Next</button></div>
 <div class="slide"><img src="2.jpg"><button onclick="nextSlide(); launchConfetti();">Next</button></div>
 <div class="slide"><img src="3.jpg"><button onclick="nextSlide(); launchConfetti();">Next</button></div>
@@ -123,38 +122,10 @@
 <div class="slide"><img src="7.jpg"><button onclick="nextSlide(); launchConfetti();">Next</button></div>
 <div class="slide"><img src="8.jpg"><button onclick="nextSlide(); launchConfetti();">Next</button></div>
 
-<!-- Last Game / Surprise slide -->
+<!-- Last Surprise Slide -->
 <div class="slide">
   <h1>🎮 Click Me For Your Surprise! 🎮</h1>
-  <button onclick="alert('From Bittu ❤️\nOnce Again Happy Birthday, Stay Blessed & Keep Growing 🎉')">Click Me</button>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<script>
-let current=0;
-let slides=document.getElementsByClassName("slide");
-function nextSlide(){
-  slides[current].style.display="none";
-  current++;
-  if(current<slides.length){
-    slides[current].style.display="block";
-  }
-}
-
-function launchConfetti(){
-  let duration=1*1000;
-  let end=Date.now()+duration;
-  (function frame(){
-    confetti({particleCount:5, angle:60, spread:55, origin:{x:0}});
-    confetti({particleCount:5, angle:120, spread:55, origin:{x:1}});
-    if(Date.now()<end) requestAnimationFrame(frame);
-  }());
-}
-</script>
-
-</body>
-</html>  <p>Click below for a surprise gift!</p>
-  <button onclick="alert('You are the Best Friend Ever 💖')">Click Me</button>
+  <button onclick="alert('From Bittu ❤️\nStay Blessed & Keep Growing Chiku 🎉')">Click Me</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -162,25 +133,31 @@ function launchConfetti(){
 let current = 0;
 let slides = document.getElementsByClassName("slide");
 
-function nextSlide() {
-  slides[current].style.display = "none";
-  current++;
-  if(current < slides.length){
-    slides[current].style.display = "block";
-  }
+// Start button plays music and moves to next slide
+function startSlides(){
+    document.getElementById("bg-music").play();
+    nextSlide();
+}
+
+// Slide navigation
+function nextSlide(){
+    slides[current].style.display = "none";
+    current++;
+    if(current < slides.length){
+        slides[current].style.display = "block";
+    }
 }
 
 // Confetti effect
-function launchConfetti() {
-  let duration = 1*1000;
-  let end = Date.now() + duration;
-  (function frame(){
-    confetti({ particleCount:5, angle:60, spread:55, origin:{x:0} });
-    confetti({ particleCount:5, angle:120, spread:55, origin:{x:1} });
-    if(Date.now() < end) requestAnimationFrame(frame);
-  }());
+function launchConfetti(){
+    let duration = 1*1000;
+    let end = Date.now() + duration;
+    (function frame(){
+        confetti({particleCount:5, angle:60, spread:55, origin:{x:0}});
+        confetti({particleCount:5, angle:120, spread:55, origin:{x:1}});
+        if(Date.now() < end) requestAnimationFrame(frame);
+    }());
 }
 </script>
 </body>
 </html>
-
